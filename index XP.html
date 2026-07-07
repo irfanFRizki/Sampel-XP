@@ -269,6 +269,298 @@
             background:var(--bg-card) !important; border:1px solid var(--border) !important;
             color:var(--text-pri) !important;
         }
+        
+        /* Toast Notifications - Modern Replacement for Alerts */
+        .toast-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            pointer-events: none;
+        }
+        .toast {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 14px 18px;
+            min-width: 320px;
+            max-width: 450px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            pointer-events: auto;
+            transform: translateX(0);
+            opacity: 1;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(8px);
+        }
+        .toast.toast-hide {
+            transform: translateX(120%);
+            opacity: 0;
+        }
+        .toast-icon {
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+        .toast-content {
+            flex: 1;
+        }
+        .toast-title {
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-bottom: 4px;
+        }
+        .toast-message {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.82rem;
+            color: var(--text-sec);
+            line-height: 1.4;
+        }
+        .toast-close {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            padding: 4px;
+            font-size: 1rem;
+            transition: color 0.2s;
+        }
+        .toast-close:hover { color: var(--text-pri); }
+        .toast-success { border-left: 4px solid var(--accent-green); }
+        .toast-error { border-left: 4px solid var(--accent-red); }
+        .toast-warning { border-left: 4px solid var(--accent-amber); }
+        .toast-info { border-left: 4px solid var(--accent-cyan); }
+        
+        /* Enhanced Modal Styles */
+        .modal-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.75);
+            backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9998;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.2s ease;
+        }
+        .modal-backdrop.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .modal-content {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            max-width: 480px;
+            width: 90%;
+            transform: scale(0.95) translateY(-10px);
+            transition: all 0.2s ease;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+        }
+        .modal-backdrop.active .modal-content {
+            transform: scale(1) translateY(0);
+        }
+        .modal-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+        .modal-icon {
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+        .modal-title {
+            font-family: 'Space Mono', monospace;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-pri);
+        }
+        .modal-body {
+            color: var(--text-sec);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        .modal-footer {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+        }
+        
+        /* Loading Spinner */
+        .spinner {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--border-light);
+            border-top-color: var(--accent-green);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        
+        /* Improved Button States */
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none !important;
+            box-shadow: none !important;
+        }
+        .btn-loading {
+            position: relative;
+            pointer-events: none;
+        }
+        .btn-loading::after {
+            content: '';
+            position: absolute;
+            width: 14px;
+            height: 14px;
+            border: 2px solid transparent;
+            border-top-color: currentColor;
+            border-radius: 50%;
+            animation: spin 0.6s linear infinite;
+            margin-left: 8px;
+        }
+        
+        /* Focus Visible for Accessibility */
+        .btn:focus-visible,
+        input:focus-visible,
+        textarea:focus-visible,
+        select:focus-visible {
+            outline: 2px solid var(--accent-green);
+            outline-offset: 2px;
+        }
+        
+        /* Skeleton Loading */
+        .skeleton {
+            background: linear-gradient(90deg, var(--bg-card) 25%, var(--bg-card-alt) 50%, var(--bg-card) 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+            border-radius: 6px;
+        }
+        @keyframes shimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+        
+        /* Improved Table Hover Effects */
+        .data-table tbody tr {
+            position: relative;
+        }
+        .data-table tbody tr::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: var(--accent-green);
+            transform: scaleY(0);
+            transition: transform 0.2s ease;
+        }
+        .data-table tbody tr:hover::before {
+            transform: scaleY(1);
+        }
+        
+        /* Badge Pulse Animation for Status */
+        @keyframes pulse-subtle {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+        .chip {
+            animation: pulse-subtle 3s ease-in-out infinite;
+        }
+        
+        /* Input Validation States */
+        input.error, textarea.error {
+            border-color: var(--accent-red) !important;
+            box-shadow: 0 0 0 2px rgba(239,68,68,0.15) !important;
+        }
+        input.success, textarea.success {
+            border-color: var(--accent-green) !important;
+            box-shadow: 0 0 0 2px rgba(0,229,160,0.15) !important;
+        }
+        .error-message {
+            color: var(--accent-red);
+            font-size: 0.75rem;
+            margin-top: 4px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        /* Tooltip Styles */
+        [data-tooltip] {
+            position: relative;
+        }
+        [data-tooltip]::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(-4px);
+            background: var(--bg-base);
+            color: var(--text-pri);
+            padding: 6px 10px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.2s ease;
+            border: 1px solid var(--border);
+            z-index: 1000;
+        }
+        [data-tooltip]:hover::after {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(-8px);
+        }
+        
+        /* Progress Bar */
+        .progress-bar {
+            height: 6px;
+            background: var(--bg-input);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        .progress-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-green), var(--accent-cyan));
+            border-radius: 3px;
+            transition: width 0.3s ease;
+        }
+        
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 48px 24px;
+            color: var(--text-muted);
+        }
+        .empty-state-icon {
+            font-size: 3rem;
+            margin-bottom: 16px;
+            opacity: 0.5;
+        }
+        .empty-state-title {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-sec);
+            margin-bottom: 8px;
+        }
+        .empty-state-desc {
+            font-size: 0.85rem;
+            line-height: 1.6;
+        }
         #belum-scan-modal .bg-gray-50 { background:var(--bg-base) !important; }
         #image-modal > div { background:#0a0c12 !important; border:1px solid var(--border) !important; }
         #image-modal .bg-gray-100 { background:#060709 !important; }
@@ -2098,12 +2390,12 @@ function siapkanDanSimpanRiwayatPrint(meta) {
                             .withSuccessHandler(function(res) {
                                 showDriveUploadLoading(false);
                                 if (!res || !res.success) {
-                                    alert('⚠️ Print berhasil, tapi riwayat GAGAL diperbarui di Google Drive.\n' + (res && res.error ? res.error : ''));
+                                    Toast.warning('⚠️ Print berhasil, tapi riwayat GAGAL diperbarui di Google Drive.\n' + (res && res.error ? res.error : ''));
                                 }
                             })
                             .withFailureHandler(function(err) {
                                 showDriveUploadLoading(false);
-                                alert('⚠️ Print berhasil, tapi riwayat GAGAL disimpan ke Google Drive:\n' + err);
+                                Toast.warning('⚠️ Print berhasil, tapi riwayat GAGAL disimpan ke Google Drive:\n' + err);
                             })
                             .simpanRiwayatPrintKeDrive(meta.fileName, entry);
                     })
@@ -2124,12 +2416,12 @@ function siapkanDanSimpanRiwayatPrint(meta) {
                     .withSuccessHandler(function(res) {
                         showDriveUploadLoading(false);
                         if (!res || !res.success) {
-                            alert('⚠️ Print berhasil, tapi riwayat GAGAL disimpan ke Google Drive.\n' + (res && res.error ? res.error : ''));
+                            Toast.warning('⚠️ Print berhasil, tapi riwayat GAGAL disimpan ke Google Drive.\n' + (res && res.error ? res.error : ''));
                         }
                     })
                     .withFailureHandler(function(err) {
                         showDriveUploadLoading(false);
-                        alert('⚠️ Print berhasil, tapi riwayat GAGAL disimpan ke Google Drive:\n' + err);
+                        Toast.warning('⚠️ Print berhasil, tapi riwayat GAGAL disimpan ke Google Drive:\n' + err);
                     })
                     .simpanRiwayatPrintKeDrive(meta.fileName, entry);
             }
@@ -2137,7 +2429,7 @@ function siapkanDanSimpanRiwayatPrint(meta) {
             try {
                 localStorage.setItem(_localKeyForFile(meta.fileName), JSON.stringify(riwayatPrintSampel.slice(0, 60)));
             } catch (e) {
-                alert('⚠️ Print berhasil, tapi riwayat TIDAK bisa disimpan karena penyimpanan browser penuh.');
+                Toast.warning('⚠️ Print berhasil, tapi riwayat TIDAK bisa disimpan karena penyimpanan browser penuh.');
             }
         }
     });
@@ -2435,7 +2727,7 @@ function hapusRiwayatPrint(id, dariDetail) {
             .withSuccessHandler(function() { showDriveUploadLoading(false); })
             .withFailureHandler(function(err) {
                 showDriveUploadLoading(false);
-                alert('⚠️ Gagal menghapus riwayat di Google Drive:\n' + err);
+                Toast.warning('⚠️ Gagal menghapus riwayat di Google Drive:\n' + err);
             })
             .hapusRiwayatPrintDrive(fileKeyTarget, id);
     } else {
@@ -2456,7 +2748,7 @@ function hapusSemuaRiwayatPrint() {
             .withSuccessHandler(function() { showDriveUploadLoading(false); })
             .withFailureHandler(function(err) {
                 showDriveUploadLoading(false);
-                alert('⚠️ Gagal menghapus riwayat di Google Drive:\n' + err);
+                Toast.warning('⚠️ Gagal menghapus riwayat di Google Drive:\n' + err);
             })
             .hapusSemuaRiwayatPrintDrive(currentFileName);
     } else {
@@ -2496,7 +2788,7 @@ function editRiwayatDariDetail(id) {
     var entry = riwayatPrintSampel.find(function(r) { return r.id === id; });
     if (!entry) return;
     if (!entry.items || entry.items.length === 0) {
-        alert('Riwayat ini tidak memiliki data item yang bisa diedit.');
+        Toast.warning('Riwayat ini tidak memiliki data item yang bisa diedit.');
         return;
     }
 
@@ -2593,11 +2885,11 @@ function batalEditRiwayat() {
 // Simpan hasil edit riwayat tanpa print ulang, lalu kembali ke scan part aktif.
 function simpanEditTanpaPrint() {
     if (_editingRiwayatId === null) {
-        alert('Tidak ada riwayat yang sedang diedit.');
+        Toast.warning('Tidak ada riwayat yang sedang diedit.');
         return;
     }
     if (listSJ.length === 0) {
-        alert('Tidak ada data edit untuk disimpan.');
+        Toast.warning('Tidak ada data edit untuk disimpan.');
         return;
     }
 
@@ -2667,7 +2959,7 @@ function simpanEditTanpaPrint() {
     renderRiwayatBadge();
     if (typeof renderResumeRiwayatPanel === 'function') renderResumeRiwayatPanel();
 
-    alert('Perubahan riwayat berhasil disimpan. Lanjut scan Part ' + printPart + '.');
+    Toast.warning('Perubahan riwayat berhasil disimpan. Lanjut scan Part ' + printPart + '.');
 }
 // Setup Tanggal Cetak UI
 function setTanggalDisplay() {
@@ -3420,7 +3712,7 @@ function _renderChips(type) {
 function bukaSimpanProfilTTD(type) {
     var nama = document.getElementById('input-' + type).value.trim();
     if (!nama) {
-        alert('Ketik Nama ' + (type === 'pengirim' ? 'Pengirim' : 'Penerima') + ' terlebih dahulu sebelum menyimpan profil.');
+        Toast.warning('Ketik Nama ' + (type === 'pengirim' ? 'Pengirim' : 'Penerima') + ' terlebih dahulu sebelum menyimpan profil.');
         document.getElementById('input-' + type).focus();
         return;
     }
@@ -3442,7 +3734,7 @@ function bukaSimpanProfilTTD(type) {
 
 function bukaLoadProfilTTD(profilId) {
     var profil = _profilTTDList.find(function(p) { return p.id === profilId; });
-    if (!profil) { alert('Profil tidak ditemukan.'); return; }
+    if (!profil) { Toast.error('Profil tidak ditemukan.'); return; }
 
     _profilPinMode   = 'muat';
     _profilPinTarget = profil;
@@ -4088,7 +4380,7 @@ function checkCKUploadArea() {
 
 // Print Cari Kolian
 function printCK() {
-    if (listCK.length === 0) return alert("Belum ada data di tabel Cari Kolian untuk di-print.");
+    if (listCK.length === 0) return Toast.warning("Belum ada data di tabel Cari Kolian untuk di-print.");
 
     var kodeCounts = {};
     listCK.forEach(function(item) {
@@ -5512,7 +5804,7 @@ function hideScanLoading() {
 }
 
 function handleScan() {
-    if (packingListData.length === 0) return alert("Silahkan upload file Packing List (Excel) terlebih dahulu!");
+    if (packingListData.length === 0) return Toast.warning("Silahkan upload file Packing List (Excel) terlebih dahulu!");
 
     const kodeInput = document.getElementById('scan-kode').value.trim();
     if (!kodeInput) return;
@@ -5784,12 +6076,12 @@ function kvKonfirmGantiBeda() {
     var harga         = document.getElementById('kv-harga-beda').value;
 
     if (!kodeGantiBaru) {
-        alert('Harap isi Kode di PL yang diganti (baru)!');
+        Toast.warning('Harap isi Kode di PL yang diganti (baru)!');
         document.getElementById('kv-kode-ganti-baru').focus();
         return;
     }
     if (!harga) {
-        alert('Harap isi Harga!');
+        Toast.warning('Harap isi Harga!');
         document.getElementById('kv-harga-beda').focus();
         return;
     }
@@ -5898,7 +6190,7 @@ function nfLanjutTidakAda() {
     let kolianManual = document.getElementById('nf-ta-kolian').value.trim() || "-";
 
     if(!qtyPLManual || !hargaManual || !deskripsiManual) {
-        return alert("Harap lengkapi semua field Qty PL, Harga, dan Deskripsi!");
+        return Toast.warning("Harap lengkapi semua field Qty PL, Harga, dan Deskripsi!");
     }
 
     let notFoundItem = { 
@@ -5922,7 +6214,7 @@ function nfLanjutGanti() {
     let deskripsiBaru = document.getElementById('nf-deskripsi').value.trim();
 
     if(!kodeGanti || !hargaBaru || !deskripsiBaru) {
-        return alert("Harap lengkapi semua field Kode Ganti, Harga, dan Deskripsi!");
+        return Toast.warning("Harap lengkapi semua field Kode Ganti, Harga, dan Deskripsi!");
     }
 
     // Cari referensi kode pengganti di PL untuk Qty PL dan Kolian
@@ -7072,7 +7364,7 @@ function initPrintSettings() {
 }
 
 function printSJ() {
-    if (listSJ.length === 0) return alert("Belum ada data di Part ini untuk di-print.");
+    if (listSJ.length === 0) return Toast.warning("Belum ada data di Part ini untuk di-print.");
     
     const now = new Date();
     const tglFormatted = String(now.getDate()).padStart(2, '0') + '/' + String(now.getMonth() + 1).padStart(2, '0') + '/' + now.getFullYear() + ' ' + String(now.getHours()).padStart(2, '0') + ':' + String(now.getMinutes()).padStart(2, '0');
@@ -7178,7 +7470,7 @@ function printSJ() {
 // ════════════════════════════════════════════════════════
 function printPOan() {
     if (!riwayatPrintSampel || riwayatPrintSampel.length === 0) {
-        return alert('Belum ada Riwayat Print Sampel.\nLakukan Print SAMPEL terlebih dahulu agar riwayat tersimpan.');
+        return Toast.warning('Belum ada Riwayat Print Sampel.\nLakukan Print SAMPEL terlebih dahulu agar riwayat tersimpan.');
     }
 
     // Kumpulkan semua item dari semua part di riwayatPrintSampel
@@ -7203,7 +7495,7 @@ function printPOan() {
     });
 
     if (allItems.length === 0) {
-        return alert('Tidak ada item dengan keterangan yang diisi di Riwayat Print Sampel.\nIsi kolom Keterangan pada saat scan untuk menggunakannya.');
+        return Toast.warning('Tidak ada item dengan keterangan yang diisi di Riwayat Print Sampel.\nIsi kolom Keterangan pada saat scan untuk menggunakannya.');
     }
 
     // Ekstrak prefix dari keterangan
@@ -7359,7 +7651,7 @@ function printPOan() {
 }
 
 function downloadExcel() {
-    if (riwayatPrintSampel.length === 0) return alert("Tidak ada data riwayat print untuk didownload.");
+    if (riwayatPrintSampel.length === 0) return Toast.warning("Tidak ada data riwayat print untuk didownload.");
     
     var entries = riwayatPrintSampel.slice().sort(function(a, b) {
         return (a.part || 0) - (b.part || 0);
@@ -7492,7 +7784,7 @@ document.getElementById('ch-upload-pl-server').addEventListener('change', async 
         var detailList = baseNames.map(function(b, i) {
             return (i + 1) + '. ' + fileList[i].name + '  \u2192  nama dasar: "' + b + '"';
         }).join('\n');
-        alert(
+        Toast.warning(
             '\u274C Semua file harus memiliki nama dasar yang sama!\n\n' +
             'Terdeteksi nama dasar berbeda:\n' + detailList + '\n\n' +
             '\u2705 Diizinkan  : MLT - 12 A (2026)  +  MLT - 12 A (2026) (PART2)\n' +
@@ -7638,8 +7930,8 @@ document.getElementById('ch-upload-sj-dl').addEventListener('change', async func
 });
 
 function jalankanCekHarga() {
-    if (chDataSJ.length === 0) return alert('Upload dulu Hasil Download Excel Surat Jalan SAMPEL!');
-    if (chDataServer.length === 0) return alert('Upload dulu PL Server!');
+    if (chDataSJ.length === 0) return Toast.warning('Upload dulu Hasil Download Excel Surat Jalan SAMPEL!');
+    if (chDataServer.length === 0) return Toast.warning('Upload dulu PL Server!');
 
     chHasilPerbandingan = [];
     var sama = 0, beda = 0, notFound = 0;
@@ -7797,7 +8089,7 @@ function copyHargaKeWA() {
     var data = chGetFilteredSortedData();
 
     if (!data || data.length === 0) {
-        alert('Belum ada data hasil perbandingan untuk di-copy.');
+        Toast.warning('Belum ada data hasil perbandingan untuk di-copy.');
         return;
     }
 
@@ -7866,7 +8158,7 @@ function copyHargaAsImage() {
     var data = chGetFilteredSortedData();
 
     if (!data || data.length === 0) {
-        alert('Belum ada data untuk di-copy sebagai gambar.');
+        Toast.warning('Belum ada data untuk di-copy sebagai gambar.');
         return;
     }
 
@@ -8178,7 +8470,7 @@ function updateSortButtonsUI() {
 }
 
 function downloadCekHargaExcel() {
-    if (chHasilPerbandingan.length === 0) return alert('Belum ada hasil perbandingan untuk didownload!');
+    if (chHasilPerbandingan.length === 0) return Toast.warning('Belum ada hasil perbandingan untuk didownload!');
     var exportData = chHasilPerbandingan.map(function(item) {
         return {
             'Kode'                : item.kode,
@@ -9239,10 +9531,94 @@ function ubahKolomSJServerPL(idx, field, valStr) {
     <span class="draft-toast-icon">💾</span>
     <span class="draft-toast-label">Menyimpan sesi...</span>
 </div>
+
+<!-- Toast Notification Container -->
+<div id="toast-container" class="toast-container"></div>
+
 <style>
 .draft-toast-hidden { opacity: 0 !important; transform: translateY(10px) !important; pointer-events: none !important; }
 #autosave-draft-toast[data-type="error"] { border-color: rgba(239,68,68,0.35); color: #f87171; }
 #autosave-draft-toast[data-type="saved"] { color: var(--accent-green, #00e5a0); }
 </style>
+
+<script>
+// Modern Toast Notification System - Replaces alert() calls
+const Toast = {
+    container: null,
+    
+    init() {
+        this.container = document.getElementById('toast-container');
+        if (!this.container) {
+            console.error('Toast container not found');
+        }
+    },
+    
+    show(message, type = 'info', title = null, duration = 4000) {
+        if (!this.container) this.init();
+        
+        const icons = {
+            success: '✅',
+            error: '❌',
+            warning: '⚠️',
+            info: 'ℹ️'
+        };
+        
+        const titles = {
+            success: 'Berhasil',
+            error: 'Error',
+            warning: 'Peringatan',
+            info: 'Info'
+        };
+        
+        const toast = document.createElement('div');
+        toast.className = `toast toast-${type}`;
+        toast.innerHTML = `
+            <span class="toast-icon">${icons[type] || icons.info}</span>
+            <div class="toast-content">
+                <div class="toast-title">${title || titles[type]}</div>
+                <div class="toast-message">${message}</div>
+            </div>
+            <button class="toast-close" onclick="this.parentElement.remove()">×</button>
+        `;
+        
+        this.container.appendChild(toast);
+        
+        // Auto remove after duration
+        setTimeout(() => {
+            toast.classList.add('toast-hide');
+            setTimeout(() => toast.remove(), 300);
+        }, duration);
+        
+        return toast;
+    },
+    
+    success(message, title = null, duration = 3000) {
+        return this.show(message, 'success', title, duration);
+    },
+    
+    error(message, title = null, duration = 5000) {
+        return this.show(message, 'error', title, duration);
+    },
+    
+    warning(message, title = null, duration = 4000) {
+        return this.show(message, 'warning', title, duration);
+    },
+    
+    info(message, title = null, duration = 3000) {
+        return this.show(message, 'info', title, duration);
+    }
+};
+
+// Override alert() function to use Toast instead (optional - for gradual migration)
+// Uncomment the line below to replace all alert() calls with Toast
+// window.alert = (msg) => Toast.error(msg, 'Perhatian', 5000);
+
+// Initialize Toast system when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => Toast.init());
+} else {
+    Toast.init();
+}
+</script>
 </body>
 </html>
